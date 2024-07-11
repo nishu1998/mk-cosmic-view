@@ -39,4 +39,26 @@
         android:layout_marginTop="16dp"
         android:layout_margin="16dp"/>
 
+    <Button
+        android:id="@+id/btnNeoWs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NeoWs (Asteroids)"
+        app:layout_constraintTop_toBottomOf="@id/btnMarsRoverPhotos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/btnImageLibrary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image Library"
+        app:layout_constraintTop_toBottomOf="@id/btnNeoWs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_margin="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

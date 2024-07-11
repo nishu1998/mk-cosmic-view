@@ -24,5 +24,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnMarsRoverPhotos.setOnClickListener {
             startActivity(Intent(this, MarsRoverPhotosActivity::class.java))
         }
+
+        binding.btnNeoWs.setOnClickListener {
+            startActivity(Intent(this, NeoWsActivity::class.java))
+        }
+
+//        binding.btnImageLibrary.setOnClickListener {
+//            startActivity(Intent(this, ImageLibraryActivity::class.java))
+//        }
     }
 }

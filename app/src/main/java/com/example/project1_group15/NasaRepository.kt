@@ -19,4 +19,7 @@ class NasaRepository {
     suspend fun getApod(apiKey: String) = apiService.getApod(apiKey)
 
     suspend fun getMarsRoverPhotos(apiKey: String, sol: Int) = apiService.getMarsRoverPhotos(sol, apiKey)
+
+    suspend fun getNeoWs(apiKey: String, startDate: String, endDate: String) = apiService.getNeoWs(startDate, endDate, apiKey)
+
 }

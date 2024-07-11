@@ -29,8 +29,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NeoWsActivity::class.java))
         }
 
-//        binding.btnImageLibrary.setOnClickListener {
-//            startActivity(Intent(this, ImageLibraryActivity::class.java))
-//        }
     }
 }

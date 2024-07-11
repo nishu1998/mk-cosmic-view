@@ -10,18 +10,22 @@
         android:id="@+id/btnAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_gradient"
+        android:text=" About Us"
+        android:textColorLink="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnApod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Astronomy Picture of the Day"
+        android:background="@drawable/button_gradient"
+
         app:layout_constraintTop_toBottomOf="@id/btnAbout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mars Rover Photos"
+        android:background="@drawable/button_gradient"
+
         app:layout_constraintTop_toBottomOf="@id/btnApod"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NeoWs (Asteroids)"
+        android:background="@drawable/button_gradient"
+
         app:layout_constraintTop_toBottomOf="@id/btnMarsRoverPhotos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Image Library"
+        android:background="@drawable/button_gradient"
+
         app:layout_constraintTop_toBottomOf="@id/btnNeoWs"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

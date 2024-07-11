@@ -9,26 +9,37 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:textSize="16sp"
+        android:text="Name -"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvMagnitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Magnitude" />
+        android:text="Magnitude -"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/tvDiameter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Diameter" />
+        android:text="Diameter -"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/tvHazardous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hazardous" />
+        android:text="Hazardous -"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

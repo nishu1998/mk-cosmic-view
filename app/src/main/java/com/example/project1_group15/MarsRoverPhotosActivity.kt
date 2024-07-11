@@ -16,6 +16,8 @@ class MarsRoverPhotosActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val adapter = MarsRoverPhotosAdapter(emptyList())
+
+        // Set the RecyclerView to use a LinearLayoutManager for vertical orientation
         binding.rvMarsRoverPhotos.layoutManager = LinearLayoutManager(this)
         binding.rvMarsRoverPhotos.adapter = adapter
 

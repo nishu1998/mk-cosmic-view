@@ -1,6 +1,7 @@
 package com.example.project1_group15
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NasaApiService {
@@ -20,4 +21,13 @@ interface NasaApiService {
         @Query("end_date") endDate: String,
         @Query("api_key") apiKey: String
     ): NeoWsResponse
+
+    @GET("EPIC/api/natural/images")
+    suspend fun getEpicImages(@Query("api_key") apiKey: String): List<EpicImageResponse>
+
+    @GET("EPIC/api/natural/date/{date}")
+    suspend fun getEpicImagesByDate(
+        @Path("date") date: String,
+        @Query("api_key") apiKey: String
+    ): List<EpicImageResponse>
 }

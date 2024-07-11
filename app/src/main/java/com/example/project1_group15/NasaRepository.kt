@@ -22,4 +22,10 @@ class NasaRepository {
 
     suspend fun getNeoWs(apiKey: String, startDate: String, endDate: String) = apiService.getNeoWs(startDate, endDate, apiKey)
 
+    suspend fun getEpicImages(apiKey: String) = apiService.getEpicImages(apiKey)
+
+    suspend fun getEpicImagesByDate(apiKey: String, date: String) = apiService.getEpicImagesByDate(date, apiKey)
+
+
+
 }

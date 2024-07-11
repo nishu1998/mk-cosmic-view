@@ -29,5 +29,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NeoWsActivity::class.java))
         }
 
+        binding.btnEpic.setOnClickListener {
+            startActivity(Intent(this, EpicActivity::class.java))
+        }
+
     }
 }

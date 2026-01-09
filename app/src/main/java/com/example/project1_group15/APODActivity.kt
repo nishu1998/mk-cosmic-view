@@ -1,6 +1,7 @@
 package com.example.project1_group15
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,14 +23,25 @@ class APODActivity :AppCompatActivity(){
             result.onSuccess { apod ->
                 binding.tvApodTitle.text = apod.title
                 binding.tvApodExplanation.text = apod.explanation
-                // TEMP: image loading will be guarded next step
-                Glide.with(this)
-                    .load(apod.url)
-                    .into(binding.ivApodImage)
+                if (apod.media_type == "image" && !apod.url.isNullOrEmpty()) {
+                    binding.ivApodImage.visibility = View.VISIBLE
+
+                    Glide.with(this)
+                        .load(apod.url)
+                        .into(binding.ivApodImage)
+
+                } else {
+                    // Video or unsupported media
+                    binding.ivApodImage.visibility = View.GONE
+                    binding.tvApodExplanation.append(
+                        "\n\n⚠️ Today's Astronomical picture of the day is a video. Please view it on NASA's official website."
+                    )
+                }
+
             }.onFailure {
                 Toast.makeText(
                     this,
-                    "Unable to load Astrological picture of the day. Please check your internet connection.",
+                    "Failed to load Astronomical picture of the day. Please check your internet connection.",
                     Toast.LENGTH_LONG
                 ).show()
             }

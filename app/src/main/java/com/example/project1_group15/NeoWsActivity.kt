@@ -1,15 +1,16 @@
 package com.example.project1_group15
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project1_group15.databinding.ActivityNeoWsBinding
-import android.widget.Toast
 
 class NeoWsActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityNeoWsBinding
-    private lateinit var viewModel: NeoWsViewModel
+    private val viewModel: NeoWsViewModel by viewModels()
     private lateinit var adapter: NeoWsAdapter
 
 

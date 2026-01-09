@@ -2,17 +2,22 @@ package com.example.project1_group15
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+
 
 class ApodViewModel : ViewModel() {
     private val repository = NasaRepository()
 
-    val apodData: LiveData<ApodResponse> = liveData {
-        val data = repository.getApod(apiKey = "gfWcMDTnSlpSMxy2Qog4KccxZenNuyT5m9i42pdj")
-        emit(data)
-    }
-
+    private val _apodResult = MutableLiveData<Result<ApodResponse>>()
+    val apodResult: LiveData<Result<ApodResponse>> = _apodResult
     fun loadApod() {
-        // This function can be left empty or used if you need to trigger loading data in specific situations
+        viewModelScope.launch {
+            val result = repository.getApod(
+                apiKey = "gfWcMDTnSlpSMxy2Qog4KccxZenNuyT5m9i42pdj"
+            )
+            _apodResult.postValue(result)
+        }
     }
 }

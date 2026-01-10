@@ -1,5 +1,6 @@
 package com.example.project1_group15
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -19,12 +20,20 @@ class HomeActivity : AppCompatActivity() {
         drawerLayout = binding.drawerLayout
 
         setupMenuButton()
+        setupApodClick()
 
     }
 
     private fun setupMenuButton() {
         binding.btnMenu.setOnClickListener {
             drawerLayout.open()
+        }
+    }
+
+    private fun setupApodClick() {
+        binding.imgApod.setOnClickListener {
+            val intent = Intent(this, APODActivity::class.java)
+            startActivity(intent)
         }
     }
 }

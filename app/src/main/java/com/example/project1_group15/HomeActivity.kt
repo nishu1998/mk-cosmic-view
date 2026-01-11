@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.project1_group15.databinding.ActivityHomeBinding
 import android.widget.Toast
-
+import androidx.core.view.GravityCompat
 
 
 class HomeActivity : AppCompatActivity() {
@@ -21,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         drawerLayout = binding.drawerLayout
 
         setupMenuButton()
+        setupDrawerNavigation()
         setupApodClick()
         setupCardClicks()
 
@@ -33,6 +34,47 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    // 📋 Drawer menu navigation
+    private fun setupDrawerNavigation() {
+        binding.navigationView.setNavigationItemSelectedListener { item ->
+
+            when (item.itemId) {
+
+                R.id.nav_home -> {
+                    // Already on Home
+                }
+
+                R.id.nav_apod -> {
+                    startActivity(Intent(this, APODActivity::class.java))
+                }
+
+                R.id.nav_epic -> {
+                    startActivity(Intent(this, EpicActivity::class.java))
+                }
+
+                R.id.nav_neows -> {
+                    startActivity(Intent(this, NeoWsActivity::class.java))
+                }
+
+                R.id.nav_gallery -> {
+                    Toast.makeText(this, "Space Gallery coming soon 🖼️", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.nav_news -> {
+                    Toast.makeText(this, "Space News coming soon 📰", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.nav_about -> {
+                    startActivity(Intent(this, AboutActivity::class.java))
+                }
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+    }
+
+    // 🌌 APOD hero image click
     private fun setupApodClick() {
         binding.imgApod.setOnClickListener {
             val intent = Intent(this, APODActivity::class.java)
@@ -40,6 +82,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    // 🧱 Home card clicks
     private fun setupCardClicks() {
 
         // 🖼️ Space Gallery (future feature)

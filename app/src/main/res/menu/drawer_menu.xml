@@ -13,6 +13,19 @@
         android:id="@+id/nav_epic"
         android:title="🌍 Earth Today (EPIC)" />
 
+
+    <item
+        android:id="@+id/nav_gallery"
+        android:title="🖼️ Space Gallery" />
+
+    <item
+        android:id="@+id/nav_news"
+        android:title="📰 Space News" />
+
+    <item
+        android:id="@+id/nav_neows"
+        android:title="🛰️ Asteroid Watch" />
+
     <item
         android:id="@+id/nav_about"
         android:title="ℹ️ About" />

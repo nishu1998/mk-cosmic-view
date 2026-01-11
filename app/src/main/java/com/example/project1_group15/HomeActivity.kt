@@ -7,11 +7,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.project1_group15.databinding.ActivityHomeBinding
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.activity.viewModels
+import com.bumptech.glide.Glide
+
 
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var drawerLayout: DrawerLayout
+    private val homeViewModel: HomeViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +29,8 @@ class HomeActivity : AppCompatActivity() {
         setupDrawerNavigation()
         setupApodClick()
         setupCardClicks()
+        loadApodOnHome()
+
 
     }
 
@@ -105,4 +112,24 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this, "Space News coming soon 📰", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun loadApodOnHome() {
+
+        homeViewModel.loadApod()
+
+        homeViewModel.apodState.observe(this) { result ->
+            result.onSuccess { apod ->
+
+                Glide.with(this)
+                    .load(apod.url)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_placeholder_space)
+                    .into(binding.imgApod)
+
+            }.onFailure {
+                // Keep placeholder, optional toast/log
+            }
+        }
+    }
+
 }

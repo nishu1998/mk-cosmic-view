@@ -18,6 +18,7 @@ class NasaRepository {
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.nasa.gov/")
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.example.project1_group15"
     compileSdk = 34
-
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         applicationId = "com.example.project1_group15"
         minSdk = 24
@@ -15,6 +17,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "UNSPLASH_KEY",
+            "\"${project.properties["UNSPLASH_ACCESS_KEY"]}\""
+        )
     }
 
     buildTypes {

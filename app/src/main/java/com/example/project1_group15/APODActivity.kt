@@ -27,7 +27,9 @@ class APODActivity :AppCompatActivity(){
                     binding.ivApodImage.visibility = View.VISIBLE
 
                     Glide.with(this)
-                        .load(apod.url)
+                        .load(apod.hdurl ?: apod.url)
+                        .placeholder(R.drawable.ic_placeholder_space)
+                        .error(R.drawable.ic_placeholder_space)
                         .into(binding.ivApodImage)
 
                 } else {

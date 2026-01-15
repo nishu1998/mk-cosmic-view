@@ -12,8 +12,5 @@ class AboutActivity : AppCompatActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvAboutApp.text = "About the App"
-        binding.tvAppDescription.text = "This app provides daily space images and information from NASA."
-        binding.tvGroupMembers.text = "Group Members: Nishant Gautam, Deepak, Amaar Yasir Channa, Kiran Kumar Chaudhary"
     }
 }

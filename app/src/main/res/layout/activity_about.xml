@@ -1,59 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutActivity"
-    android:background="@drawable/button_gradient">
+    android:padding="20dp"
+    android:background="#0B0F2B">
 
-    <TextView
-        android:id="@+id/tvAboutApp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="About the App"
-        android:textAlignment="center"
-        android:textColor="#020202"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvAppDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="20dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="20dp"
-        android:text="This app provides daily space images and information from NASA."
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAboutApp" />
+        <!-- App Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MK Cosmic View"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/tvGroupMembers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingStart="20dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="20dp"
-        android:text="Group Members: Member 1, Member 2, Member 3, Member 4"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAppDescription" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore the universe, one moment at a time."
+            android:textSize="14sp"
+            android:textColor="#B0B3FF"
+            android:layout_marginTop="6dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#2A2F6B"
+            android:layout_marginVertical="16dp" />
+
+        <!-- About App -->
+        <TextView
+            android:text="About the App"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MK Cosmic View is a space exploration app designed for astronomy enthusiasts. It brings together stunning space imagery, upcoming celestial events, and curated astronomical content in a simple and visually engaging experience."
+            android:textColor="#D1D3FF"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Data Sources -->
+        <TextView
+            android:text="Data Sources"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• NASA Image and Video Library\n• Public astronomical calendars and verified astronomy sources"
+            android:textColor="#D1D3FF"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Tech Stack -->
+        <TextView
+            android:text="Technology"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Kotlin\n• MVVM Architecture\n• Retrofit &amp; Coroutines\n• ViewBinding\n• Material Design"
+            android:textColor="#D1D3FF"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Developer -->
+        <TextView
+            android:text="Developer"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Developed by Nishant Gautam.\nAndroid Developer focused on building clean, scalable, and user-friendly mobile applications."
+            android:textColor="#D1D3FF"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+</ScrollView>

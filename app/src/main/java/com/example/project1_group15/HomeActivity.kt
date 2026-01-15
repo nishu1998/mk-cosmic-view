@@ -93,10 +93,11 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-        // 📅 Upcoming Events (future feature)
+        // 📅 Upcoming Events
         binding.cardEvents.setOnClickListener {
-            Toast.makeText(this, "Upcoming Events coming soon 📅", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, UpcomingEventsActivity::class.java))
         }
+
 
         // 🚀 Latest Space News (future feature)
         binding.cardNews.setOnClickListener {

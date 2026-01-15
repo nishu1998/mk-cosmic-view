@@ -11,11 +11,12 @@ import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 
 
-
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var drawerLayout: DrawerLayout
     private val unsplashViewModel: UnsplashViewModel by viewModels()
+    private val nasaImageViewModel: NasaImageViewModel by viewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         setupCardClicks()
         observeHeroImage()
         unsplashViewModel.loadHeroImage()
-
+        loadNasaHeroImage()
 
     }
 
@@ -128,5 +129,25 @@ class HomeActivity : AppCompatActivity() {
             // Optional: log only, no toast spam
         }
     }
+
+    private fun loadNasaHeroImage() {
+
+        nasaImageViewModel.loadHeroImage()
+
+        nasaImageViewModel.heroImageUrl.observe(this) { imageUrl ->
+
+            if (!imageUrl.isNullOrEmpty()) {
+
+                Glide.with(this)
+                    .load(imageUrl)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_placeholder_space)
+                    .error(R.drawable.ic_placeholder_space)
+                    .into(binding.imgApod)
+
+            }
+        }
+    }
+
 
 }

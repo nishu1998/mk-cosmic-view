@@ -89,7 +89,7 @@ class HomeActivity : AppCompatActivity() {
 
         // 🖼️ Space Gallery (future feature)
         binding.cardGallery.setOnClickListener {
-            Toast.makeText(this, "Space Gallery coming soon 🚀", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SpaceGalleryActivity::class.java))
         }
 
 

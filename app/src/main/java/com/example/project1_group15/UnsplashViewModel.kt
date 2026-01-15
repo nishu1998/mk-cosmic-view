@@ -21,12 +21,16 @@ class UnsplashViewModel : ViewModel() {
             try {
                 val photos = repository.getSpacePhotos()
                 if (photos.isNotEmpty()) {
-                    _heroImageUrl.postValue(photos.random().urls.regular)
+                    val url = photos.random().urls.regular
+                    android.util.Log.d("UNSPLASH_VM", "Loading image: $url")
+                    _heroImageUrl.postValue(url)
                 } else {
-                    _errorMessage.postValue("No space images available")
+                    android.util.Log.e("UNSPLASH_VM", "Empty photo list")
+                    _errorMessage.postValue("No images returned")
                 }
+
             } catch (e: Exception) {
-                e.printStackTrace()
+                android.util.Log.e("UNSPLASH_VM", "Failed to load image", e)
                 _errorMessage.postValue("Failed to load space image")
             }
         }

@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var drawerLayout: DrawerLayout
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val unsplashViewModel: UnsplashViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,8 @@ class HomeActivity : AppCompatActivity() {
         setupDrawerNavigation()
         setupApodClick()
         setupCardClicks()
-        loadApodOnHome()
+        observeHeroImage()
+        unsplashViewModel.loadHeroImage()
 
 
     }
@@ -113,22 +114,18 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadApodOnHome() {
+    private fun observeHeroImage() {
 
-        homeViewModel.loadApod()
+        unsplashViewModel.heroImageUrl.observe(this) { imageUrl ->
+            Glide.with(this)
+                .load(imageUrl)
+                .centerCrop()
+                .placeholder(R.drawable.ic_placeholder_space)
+                .into(binding.imgApod)
+        }
 
-        homeViewModel.apodState.observe(this) { result ->
-            result.onSuccess { apod ->
-
-                Glide.with(this)
-                    .load(apod.url)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_placeholder_space)
-                    .into(binding.imgApod)
-
-            }.onFailure {
-                // Keep placeholder, optional toast/log
-            }
+        unsplashViewModel.errorMessage.observe(this) {
+            // Optional: log only, no toast spam
         }
     }
 

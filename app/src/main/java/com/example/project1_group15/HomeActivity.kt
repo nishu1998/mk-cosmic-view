@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var drawerLayout: DrawerLayout
-    private val unsplashViewModel: UnsplashViewModel by viewModels()
     private val nasaImageViewModel: NasaImageViewModel by viewModels()
 
 
@@ -30,8 +29,6 @@ class HomeActivity : AppCompatActivity() {
         setupDrawerNavigation()
         setupApodClick()
         setupCardClicks()
-        observeHeroImage()
-        unsplashViewModel.loadHeroImage()
         loadNasaHeroImage()
 
     }
@@ -55,10 +52,6 @@ class HomeActivity : AppCompatActivity() {
 
                 R.id.nav_apod -> {
                     startActivity(Intent(this, APODActivity::class.java))
-                }
-
-                R.id.nav_epic -> {
-                    startActivity(Intent(this, EpicActivity::class.java))
                 }
 
                 R.id.nav_neows -> {
@@ -99,10 +92,6 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this, "Space Gallery coming soon 🚀", Toast.LENGTH_SHORT).show()
         }
 
-        // 🌍 Earth Today (EPIC)
-        binding.cardEpic.setOnClickListener {
-            startActivity(Intent(this, EpicActivity::class.java))
-        }
 
         // 📅 Upcoming Events (future feature)
         binding.cardEvents.setOnClickListener {
@@ -115,20 +104,6 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeHeroImage() {
-
-        unsplashViewModel.heroImageUrl.observe(this) { imageUrl ->
-            Glide.with(this)
-                .load(imageUrl)
-                .centerCrop()
-                .placeholder(R.drawable.ic_placeholder_space)
-                .into(binding.imgApod)
-        }
-
-        unsplashViewModel.errorMessage.observe(this) {
-            // Optional: log only, no toast spam
-        }
-    }
 
     private fun loadNasaHeroImage() {
 

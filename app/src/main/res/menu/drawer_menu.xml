@@ -9,10 +9,6 @@
         android:id="@+id/nav_apod"
         android:title="🌌 Astronomy Picture of the Day" />
 
-    <item
-        android:id="@+id/nav_epic"
-        android:title="🌍 Earth Today (EPIC)" />
-
 
     <item
         android:id="@+id/nav_gallery"

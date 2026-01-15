@@ -9,11 +9,6 @@ interface NasaApiService {
     @GET("planetary/apod")
     suspend fun getApod(@Query("api_key") apiKey: String): ApodResponse
 
-    @GET("mars-photos/api/v1/rovers/curiosity/photos")
-    suspend fun getMarsRoverPhotos(
-        @Query("sol") sol: Int,
-        @Query("api_key") apiKey: String
-    ): MarsRoverPhotosResponse
 
     @GET("neo/rest/v1/feed")
     suspend fun getNeoWs(
@@ -22,12 +17,4 @@ interface NasaApiService {
         @Query("api_key") apiKey: String
     ): NeoWsResponse
 
-    @GET("EPIC/api/natural/images")
-    suspend fun getEpicImages(@Query("api_key") apiKey: String): List<EpicImageResponse>
-
-    @GET("EPIC/api/natural/date/{date}")
-    suspend fun getEpicImagesByDate(
-        @Path("date") date: String,
-        @Query("api_key") apiKey: String
-    ): List<EpicImageResponse>
 }

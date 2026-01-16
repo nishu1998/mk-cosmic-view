@@ -5,50 +5,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_placeholder_space"
+    android:background="@color/app_background"
     tools:context=".APODActivity">
 
-
-<ImageView
-android:id="@+id/ivApodImage"
-android:layout_width="0dp"
-android:layout_height="0dp"
-android:scaleType="centerCrop"
-android:contentDescription="Astronomy Picture of the Day"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintDimensionRatio="16:9"
-app:layout_constraintBottom_toTopOf="@+id/tvApodTitle" />
-
-<TextView
-android:id="@+id/tvApodTitle"
-android:layout_width="0dp"
-android:layout_height="wrap_content"
-android:textSize="24sp"
-android:textStyle="bold"
-android:textColor="@android:color/white"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:paddingTop="16dp"
-    app:layout_constraintTop_toBottomOf="@id/ivApodImage"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
-
-
-    <TextView
-        android:id="@+id/tvApodExplanation"
+    <!-- 🌌 APOD IMAGE SECTION (≈70% height) -->
+    <FrameLayout
+        android:id="@+id/apodImageContainer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvApodTitle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.7">
+
+        <ImageView
+            android:id="@+id/ivApodImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Astronomy Picture of the Day"
+            android:src="@drawable/ic_placeholder_space"/>
+
+        <!-- Gradient overlay for text readability -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_overlay"/>
+
+    </FrameLayout>
+
+    <!-- 📜 CONTENT SECTION -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/apodImageContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvApodTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_primary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                tools:text="The Pillars of Creation"/>
+
+            <!-- Subtitle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Astronomy Picture of the Day"
+                android:textColor="#B0B3FF"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Explanation -->
+            <TextView
+                android:id="@+id/tvApodExplanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_secondary"
+                android:textSize="15sp"
+                android:lineSpacingExtra="4dp"
+                tools:text="This stunning image captured by NASA showcases the vast beauty of space..."/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

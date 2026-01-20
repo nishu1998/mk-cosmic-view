@@ -1,10 +1,8 @@
 package com.example.project1_group15
 
 import android.app.DownloadManager
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -20,19 +18,6 @@ class ImageViewerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageViewerBinding
     private var downloadId: Long = -1L
-
-    private val downloadReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-            if (id == downloadId) {
-                Snackbar.make(
-                    binding.root,
-                    "Download completed • Saved to Pictures",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,37 +48,23 @@ class ImageViewerActivity : AppCompatActivity() {
 
         // ⬇️ Download button
         binding.btnDownload.setOnClickListener {
-            startDownload(imageUrl)
+            startDownloadWithSnackbar(imageUrl)
         }
 
         // 👆 Tap image to exit
         binding.photoView.setOnClickListener {
             supportFinishAfterTransition()
         }
-
-        // ✅ FIXED receiver registration (Android 13+ safe)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(
-                downloadReceiver,
-                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE),
-                Context.RECEIVER_NOT_EXPORTED
-            )
-        } else {
-            @Suppress("DEPRECATION")
-            registerReceiver(
-                downloadReceiver,
-                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-            )
-        }
-
     }
 
-    private fun startDownload(url: String) {
-        Toast.makeText(this, "Downloading started…", Toast.LENGTH_SHORT).show()
+    // ===============================
+    // DOWNLOAD WITH OPEN ACTION
+    // ===============================
+    private fun startDownloadWithSnackbar(imageUrl: String) {
 
-        val request = DownloadManager.Request(Uri.parse(url))
+        val request = DownloadManager.Request(Uri.parse(imageUrl))
             .setTitle("Downloading space image")
-            .setDescription("Saving image to device")
+            .setDescription("Saving to Pictures")
             .setNotificationVisibility(
                 DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
             )
@@ -103,12 +74,45 @@ class ImageViewerActivity : AppCompatActivity() {
                 "NASA_${System.currentTimeMillis()}.jpg"
             )
 
-        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        downloadId = manager.enqueue(request)
+        val downloadManager =
+            getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+
+        downloadId = downloadManager.enqueue(request)
+
+        // 🔔 Snackbar with OPEN action (reliable UX)
+        Snackbar.make(
+            binding.root,
+            "Downloading image…",
+            Snackbar.LENGTH_INDEFINITE
+        ).setAction("OPEN") {
+            openDownloadedImage(downloadManager)
+        }.show()
     }
 
-    override fun onDestroy() {
-        unregisterReceiver(downloadReceiver)
-        super.onDestroy()
+    // ===============================
+    // OPEN DOWNLOADED IMAGE
+    // ===============================
+    private fun openDownloadedImage(downloadManager: DownloadManager) {
+        if (downloadId == -1L) {
+            Toast.makeText(this, "No download found", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val uri = downloadManager.getUriForDownloadedFile(downloadId)
+
+        if (uri != null) {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "image/*")
+                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            }
+            startActivity(intent)
+        } else {
+            Toast.makeText(
+                this,
+                "Image is still downloading…",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
+
 }

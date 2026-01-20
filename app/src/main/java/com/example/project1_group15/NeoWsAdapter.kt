@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project1_group15.databinding.ItemNeowsBinding
 
-class NeoWsAdapter : ListAdapter<NeoWs, NeoWsAdapter.NeoWsViewHolder>(NeoWsDiffCallback()) {
+class NeoWsAdapter :
+    ListAdapter<NeoWs, NeoWsAdapter.NeoWsViewHolder>(NeoWsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NeoWsViewHolder {
-        val binding = ItemNeowsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemNeowsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NeoWsViewHolder(binding)
     }
 
@@ -18,17 +20,35 @@ class NeoWsAdapter : ListAdapter<NeoWs, NeoWsAdapter.NeoWsViewHolder>(NeoWsDiffC
         holder.bind(getItem(position))
     }
 
-    class NeoWsViewHolder(private val binding: ItemNeowsBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(neoWs: NeoWs) {
-            binding.tvName.text = neoWs.name
-            binding.tvMagnitude.text = "Magnitude: ${neoWs.absolute_magnitude_h}"
-            binding.tvDiameter.text = "Diameter: ${neoWs.estimated_diameter.kilometers.estimated_diameter_max} km"
-            binding.tvHazardous.text = if (neoWs.is_potentially_hazardous_asteroid) "Hazardous" else "Non-Hazardous"
+    class NeoWsViewHolder(
+        private val binding: ItemNeowsBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(neo: NeoWs) {
+            binding.tvName.text = neo.name
+            binding.tvMagnitude.text =
+                "Absolute Magnitude: ${neo.absolute_magnitude_h}"
+
+            binding.tvDiameter.text =
+                "Max Diameter: ${
+                    String.format(
+                        "%.3f",
+                        neo.estimated_diameter.kilometers.estimated_diameter_max
+                    )
+                } km"
+
+            if (neo.is_potentially_hazardous_asteroid) {
+                binding.tvHazardous.text = "⚠ Hazardous"
+                binding.tvHazardous.setBackgroundResource(R.drawable.bg_hazard_badge)
+            } else {
+                binding.tvHazardous.text = "✓ Safe"
+                binding.tvHazardous.setBackgroundResource(R.drawable.bg_safe_badge)
+            }
         }
     }
 
     class NeoWsDiffCallback : DiffUtil.ItemCallback<NeoWs>() {
-        override fun areItemsTheSame(oldItem: NeoWs, newItem: NeoWs) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: NeoWs, newItem: NeoWs) = oldItem == newItem
+        override fun areItemsTheSame(old: NeoWs, new: NeoWs) = old.id == new.id
+        override fun areContentsTheSame(old: NeoWs, new: NeoWs) = old == new
     }
 }

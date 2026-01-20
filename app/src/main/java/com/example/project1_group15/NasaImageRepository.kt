@@ -17,9 +17,9 @@ class NasaImageRepository {
     suspend fun searchImages(query: String): List<String> {
         val response = api.searchImages(query)
 
-        return response.collection.items.mapNotNull { item ->
-            item.links?.firstOrNull()?.href
-        }
+        return response.collection.items
+            .mapNotNull { it.links?.firstOrNull()?.href }
+            .shuffled()
     }
 
     // 🌌 HOME HERO IMAGE (single image)

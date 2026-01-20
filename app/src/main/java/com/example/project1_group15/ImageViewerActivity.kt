@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
 import com.example.project1_group15.databinding.ActivityImageViewerBinding
+import com.google.android.material.snackbar.Snackbar
 
 class ImageViewerActivity : AppCompatActivity() {
 
@@ -24,10 +25,10 @@ class ImageViewerActivity : AppCompatActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             if (id == downloadId) {
-                Toast.makeText(
-                    context,
-                    "Download completed ✔ Saved to Pictures",
-                    Toast.LENGTH_LONG
+                Snackbar.make(
+                    binding.root,
+                    "Download completed • Saved to Pictures",
+                    Snackbar.LENGTH_LONG
                 ).show()
             }
         }

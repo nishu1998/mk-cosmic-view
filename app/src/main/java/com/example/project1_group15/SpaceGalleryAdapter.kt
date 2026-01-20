@@ -1,10 +1,6 @@
 package com.example.project1_group15
 
-import android.app.DownloadManager
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -60,10 +56,7 @@ class SpaceGalleryAdapter(
             context.startActivity(intent, options.toBundle())
         }
 
-        // ⬇️ Download button
-        holder.binding.btnDownload.setOnClickListener {
-            downloadImage(context, item.imageUrl)
-        }
+
     }
 
     override fun getItemCount(): Int = images.size
@@ -75,21 +68,5 @@ class SpaceGalleryAdapter(
     }
 
     // ⬇️ Download logic
-    private fun downloadImage(context: Context, url: String) {
-        val request = DownloadManager.Request(Uri.parse(url))
-            .setTitle("Downloading space image")
-            .setDescription("Saving image to your device")
-            .setNotificationVisibility(
-                DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
-            )
-            .setAllowedOverMetered(true)
-            .setDestinationInExternalPublicDir(
-                Environment.DIRECTORY_PICTURES,
-                "NASA_${System.currentTimeMillis()}.jpg"
-            )
 
-        val manager =
-            context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        manager.enqueue(request)
-    }
 }

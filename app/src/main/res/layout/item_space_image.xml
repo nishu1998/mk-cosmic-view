@@ -21,17 +21,6 @@
             android:scaleType="centerCrop"
             android:contentDescription="Space Image"/>
 
-        <!-- ⬇️ Download Button Overlay -->
-        <ImageButton
-            android:id="@+id/btnDownload"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="top|end"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_circle_dark"
-            android:src="@drawable/ic_download"
-            android:tint="@android:color/white"
-            android:contentDescription="Download image"/>
 
     </FrameLayout>
 

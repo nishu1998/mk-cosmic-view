@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
@@ -33,4 +34,16 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:text="Astronomical Image"/>
+
+    <!-- Download button -->
+    <ImageButton
+        android:id="@+id/btnDownload"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_download"
+        android:contentDescription="Download image"
+        app:tint="@android:color/white" />
 </FrameLayout>

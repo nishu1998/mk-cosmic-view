@@ -13,10 +13,15 @@ class SpaceGalleryViewModel : ViewModel() {
     private val _images = MutableLiveData<List<String>>()
     val images: LiveData<List<String>> = _images
 
-    fun loadGalleryImages() {
+    fun loadGalleryImages(query: String = "space") {
         viewModelScope.launch {
-            val imageList = repository.fetchGalleryImages()
-            _images.postValue(imageList)
+            try {
+                val results = repository.searchImages(query)
+                _images.postValue(results)
+            } catch (e: Exception) {
+                _images.postValue(emptyList())
+            }
         }
     }
 }
+

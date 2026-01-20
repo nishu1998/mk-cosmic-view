@@ -3,9 +3,13 @@ package com.example.project1_group15
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
+import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.project1_group15.databinding.ActivitySpaceGalleryBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SpaceGalleryActivity : AppCompatActivity() {
 
@@ -13,8 +17,7 @@ class SpaceGalleryActivity : AppCompatActivity() {
     private val viewModel: SpaceGalleryViewModel by viewModels()
     private lateinit var adapter: SpaceGalleryAdapter
 
-    // 🔑 Source of truth for search
-    private var fullImageList: List<String> = emptyList()
+    private var searchJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +28,7 @@ class SpaceGalleryActivity : AppCompatActivity() {
         observeGallery()
         setupSearch()
 
+        // Initial load
         viewModel.loadGalleryImages()
     }
 
@@ -36,22 +40,23 @@ class SpaceGalleryActivity : AppCompatActivity() {
 
     private fun observeGallery() {
         viewModel.images.observe(this) { images ->
-            fullImageList = images
             adapter.submitList(images)
         }
     }
 
     private fun setupSearch() {
-        binding.etSearch.doOnTextChanged { text, _, _, _ ->
-            val query = text.toString().trim()
+        binding.etSearch.doAfterTextChanged { editable ->
+            val query = editable?.toString()?.trim().orEmpty()
 
-            if (query.isEmpty()) {
-                adapter.submitList(fullImageList)
-            } else {
-                val filtered = fullImageList.filter {
-                    it.contains(query, ignoreCase = true)
+            searchJob?.cancel()
+            searchJob = lifecycleScope.launch {
+                delay(400) // debounce for better UX & fewer API calls
+
+                if (query.isEmpty()) {
+                    viewModel.loadGalleryImages()
+                } else {
+                    viewModel.loadGalleryImages(query)
                 }
-                adapter.submitList(filtered)
             }
         }
     }

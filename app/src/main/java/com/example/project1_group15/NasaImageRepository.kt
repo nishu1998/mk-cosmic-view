@@ -14,6 +14,14 @@ class NasaImageRepository {
             .create(NasaImageApiService::class.java)
     }
 
+    suspend fun searchImages(query: String): List<String> {
+        val response = api.searchImages(query)
+
+        return response.collection.items.mapNotNull { item ->
+            item.links?.firstOrNull()?.href
+        }
+    }
+
     // 🌌 HOME HERO IMAGE (single image)
     suspend fun getHeroImage(query: String): String? {
         return try {

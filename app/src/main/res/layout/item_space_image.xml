@@ -8,11 +8,31 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-    <ImageView
-        android:id="@+id/imgSpace"
+    <!-- Container for image + overlay -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:scaleType="centerCrop"
-        android:transitionName=""
-        android:contentDescription="Space Image"/>
+        android:layout_height="wrap_content">
+
+        <!-- 🌌 Space Image -->
+        <ImageView
+            android:id="@+id/imgSpace"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Space Image"/>
+
+        <!-- ⬇️ Download Button Overlay -->
+        <ImageButton
+            android:id="@+id/btnDownload"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_circle_dark"
+            android:src="@drawable/ic_download"
+            android:tint="@android:color/white"
+            android:contentDescription="Download image"/>
+
+    </FrameLayout>
+
 </androidx.cardview.widget.CardView>

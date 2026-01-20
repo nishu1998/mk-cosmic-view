@@ -1,6 +1,10 @@
 package com.example.project1_group15
 
+import android.app.DownloadManager
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -28,8 +32,10 @@ class SpaceGalleryAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val item = images[position]
+        val context = holder.itemView.context
 
-        Glide.with(holder.itemView.context)
+        // Load image
+        Glide.with(context)
             .load(item.imageUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_placeholder_space)
@@ -38,8 +44,8 @@ class SpaceGalleryAdapter(
         // Shared element transition name
         holder.binding.imgSpace.transitionName = item.imageUrl
 
+        // 🔍 Fullscreen viewer
         holder.binding.imgSpace.setOnClickListener {
-            val context = holder.itemView.context
             val intent = Intent(context, ImageViewerActivity::class.java).apply {
                 putExtra("image_url", item.imageUrl)
                 putExtra("image_title", item.title)
@@ -53,6 +59,11 @@ class SpaceGalleryAdapter(
 
             context.startActivity(intent, options.toBundle())
         }
+
+        // ⬇️ Download button
+        holder.binding.btnDownload.setOnClickListener {
+            downloadImage(context, item.imageUrl)
+        }
     }
 
     override fun getItemCount(): Int = images.size
@@ -61,5 +72,24 @@ class SpaceGalleryAdapter(
         images.clear()
         images.addAll(newImages)
         notifyDataSetChanged()
+    }
+
+    // ⬇️ Download logic
+    private fun downloadImage(context: Context, url: String) {
+        val request = DownloadManager.Request(Uri.parse(url))
+            .setTitle("Downloading space image")
+            .setDescription("Saving image to your device")
+            .setNotificationVisibility(
+                DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+            )
+            .setAllowedOverMetered(true)
+            .setDestinationInExternalPublicDir(
+                Environment.DIRECTORY_PICTURES,
+                "NASA_${System.currentTimeMillis()}.jpg"
+            )
+
+        val manager =
+            context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        manager.enqueue(request)
     }
 }

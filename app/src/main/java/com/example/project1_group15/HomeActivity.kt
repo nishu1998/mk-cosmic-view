@@ -98,11 +98,16 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, UpcomingEventsActivity::class.java))
         }
 
+        binding.cardEvents.setOnClickListener {
+            startActivity(Intent(this, NeoWsActivity::class.java))
+        }
 
         // 🚀 Latest Space News (future feature)
         binding.cardNews.setOnClickListener {
             Toast.makeText(this, "Space News coming soon 📰", Toast.LENGTH_SHORT).show()
         }
+
+
     }
 
 

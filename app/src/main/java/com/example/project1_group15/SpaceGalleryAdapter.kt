@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project1_group15.databinding.ItemSpaceImageBinding
 
-class SpaceGalleryAdapter : RecyclerView.Adapter<SpaceGalleryAdapter.ImageViewHolder>() {
-
-    private val images = mutableListOf<String>()
+class SpaceGalleryAdapter(
+    private val images: MutableList<String> = mutableListOf(),
+    private val onImageClick: (String) -> Unit
+) : RecyclerView.Adapter<SpaceGalleryAdapter.ImageViewHolder>() {
 
     inner class ImageViewHolder(
         val binding: ItemSpaceImageBinding
@@ -24,12 +25,17 @@ class SpaceGalleryAdapter : RecyclerView.Adapter<SpaceGalleryAdapter.ImageViewHo
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        val imageUrl = images[position]
+
         Glide.with(holder.itemView.context)
-            .load(images[position])
+            .load(imageUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_placeholder_space)
-            .error(R.drawable.ic_placeholder_space)
             .into(holder.binding.imgSpace)
+
+        holder.itemView.setOnClickListener {
+            onImageClick(imageUrl)
+        }
     }
 
     override fun getItemCount(): Int = images.size

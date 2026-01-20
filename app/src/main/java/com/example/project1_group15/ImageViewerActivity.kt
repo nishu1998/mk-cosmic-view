@@ -80,13 +80,17 @@ class ImageViewerActivity : AppCompatActivity() {
         downloadId = downloadManager.enqueue(request)
 
         // 🔔 Snackbar with OPEN action (reliable UX)
-        Snackbar.make(
+        val snackbar = Snackbar.make(
             binding.root,
             "Downloading image…",
             Snackbar.LENGTH_INDEFINITE
         ).setAction("OPEN") {
             openDownloadedImage(downloadManager)
-        }.show()
+        }
+
+        snackbar.show()
+        animateSnackbar(snackbar)
+
     }
 
     // ===============================
@@ -114,5 +118,19 @@ class ImageViewerActivity : AppCompatActivity() {
             ).show()
         }
     }
+
+    private fun animateSnackbar(snackbar: Snackbar) {
+        val view = snackbar.view
+        view.alpha = 0f
+        view.translationY = view.height.toFloat()
+
+        view.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(300)
+            .setInterpolator(android.view.animation.DecelerateInterpolator())
+            .start()
+    }
+
 
 }

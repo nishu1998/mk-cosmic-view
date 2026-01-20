@@ -36,7 +36,7 @@ class SpaceGalleryActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         adapter = SpaceGalleryAdapter { imageUrl ->
             val intent = Intent(this, ImageViewerActivity::class.java)
-            intent.putExtra(ImageViewerActivity.EXTRA_IMAGE_URL, imageUrl)
+            //intent.putExtra(ImageViewerActivity.EXTRA_IMAGE_URL, imageUrl)
             startActivity(intent)
         }
 

@@ -13,5 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
+        android:transitionName=""
         android:contentDescription="Space Image"/>
 </androidx.cardview.widget.CardView>

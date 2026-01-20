@@ -3,16 +3,14 @@ package com.example.project1_group15
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project1_group15.databinding.ItemSpaceImageBinding
-import androidx.core.app.ActivityOptionsCompat
-import androidx.appcompat.app.AppCompatActivity
-
 
 class SpaceGalleryAdapter(
-    private val images: MutableList<String> = mutableListOf(),
-    private val onImageClick: (String) -> Unit
+    private val images: MutableList<SpaceImage> = mutableListOf()
 ) : RecyclerView.Adapter<SpaceGalleryAdapter.ImageViewHolder>() {
 
     inner class ImageViewHolder(
@@ -29,35 +27,37 @@ class SpaceGalleryAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val imageUrl = images[position]
+        val item = images[position]
 
         Glide.with(holder.itemView.context)
-            .load(imageUrl)
+            .load(item.imageUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_placeholder_space)
             .into(holder.binding.imgSpace)
 
-        holder.binding.imgSpace.transitionName = imageUrl
+        // Shared element transition name
+        holder.binding.imgSpace.transitionName = item.imageUrl
 
         holder.binding.imgSpace.setOnClickListener {
             val context = holder.itemView.context
-            val intent = Intent(context, ImageViewerActivity::class.java)
-            intent.putExtra("image_url", imageUrl)
+            val intent = Intent(context, ImageViewerActivity::class.java).apply {
+                putExtra("image_url", item.imageUrl)
+                putExtra("image_title", item.title)
+            }
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 context as AppCompatActivity,
                 holder.binding.imgSpace,
-                imageUrl
+                item.imageUrl
             )
 
             context.startActivity(intent, options.toBundle())
         }
-
     }
 
     override fun getItemCount(): Int = images.size
 
-    fun submitList(newImages: List<String>) {
+    fun submitList(newImages: List<SpaceImage>) {
         images.clear()
         images.addAll(newImages)
         notifyDataSetChanged()

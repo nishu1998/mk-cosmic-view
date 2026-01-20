@@ -10,18 +10,26 @@ class SpaceGalleryViewModel : ViewModel() {
 
     private val repository = NasaImageRepository()
 
-    private val _images = MutableLiveData<List<String>>()
-    val images: LiveData<List<String>> = _images
+    private val _images = MutableLiveData<List<SpaceImage>>()
+    val images: LiveData<List<SpaceImage>> = _images
 
     fun loadGalleryImages(query: String = "space") {
         viewModelScope.launch {
             try {
-                val results = repository.searchImages(query)
-                _images.postValue(results)
+                val urls = repository.searchImages(query)
+
+                // 🔁 Map String URLs → SpaceImage model
+                val mappedImages = urls.map { url ->
+                    SpaceImage(
+                        imageUrl = url,
+                        title = query.replaceFirstChar { it.uppercase() }
+                    )
+                }
+
+                _images.postValue(mappedImages)
             } catch (e: Exception) {
                 _images.postValue(emptyList())
             }
         }
     }
 }
-

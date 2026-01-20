@@ -1,6 +1,5 @@
 package com.example.project1_group15
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,21 +28,14 @@ class SpaceGalleryActivity : AppCompatActivity() {
         observeGallery()
         setupSearch()
 
-        // Initial load
         viewModel.loadGalleryImages()
     }
 
     private fun setupRecyclerView() {
-        adapter = SpaceGalleryAdapter { imageUrl ->
-            val intent = Intent(this, ImageViewerActivity::class.java)
-            //intent.putExtra(ImageViewerActivity.EXTRA_IMAGE_URL, imageUrl)
-            startActivity(intent)
-        }
-
+        adapter = SpaceGalleryAdapter()
         binding.rvGallery.layoutManager = GridLayoutManager(this, 2)
         binding.rvGallery.adapter = adapter
     }
-
 
     private fun observeGallery() {
         viewModel.images.observe(this) { images ->
@@ -57,8 +49,7 @@ class SpaceGalleryActivity : AppCompatActivity() {
 
             searchJob?.cancel()
             searchJob = lifecycleScope.launch {
-                delay(400) // debounce for better UX & fewer API calls
-
+                delay(400)
                 if (query.isEmpty()) {
                     viewModel.loadGalleryImages()
                 } else {

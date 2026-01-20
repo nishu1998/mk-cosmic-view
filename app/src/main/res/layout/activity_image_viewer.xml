@@ -5,10 +5,32 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
+    <!-- 🌌 FULLSCREEN IMAGE (Shared Element) -->
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionName="space_image"
         android:contentDescription="Full screen space image"/>
+
+    <!-- 🌑 TOP GRADIENT OVERLAY -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="@drawable/ic_placeholder_space"/>
+
+    <!-- 🏷️ IMAGE TITLE -->
+    <TextView
+        android:id="@+id/tvImageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="Astronomical Image"/>
 </FrameLayout>

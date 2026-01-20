@@ -15,8 +15,13 @@ class NasaImageViewModel : ViewModel() {
 
     fun loadHeroImage() {
         viewModelScope.launch {
-            val imageUrl = repository.getHeroImage("galaxy")
-            _heroImageUrl.postValue(imageUrl)
+            try {
+                // 🔥 THIS is the only important line
+                val imageUrl = repository.getHeroImage()
+                _heroImageUrl.postValue(imageUrl)
+            } catch (e: Exception) {
+                _heroImageUrl.postValue(null)
+            }
         }
     }
 }

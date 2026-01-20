@@ -23,22 +23,30 @@ class NasaImageRepository {
     }
 
     // 🌌 HOME HERO IMAGE (single image)
-    suspend fun getHeroImage(query: String): String? {
+    suspend fun getHeroImage(): String? {
         return try {
-            val response = api.searchImages(query)
-            val imageUrl = response.collection.items
-                .firstOrNull()
+            val queries = listOf(
+                "nebula",
+                "galaxy",
+                "deep space",
+                "star cluster",
+                "cosmic dust"
+            )
+
+            val randomQuery = queries.random()
+            val response = api.searchImages(randomQuery)
+
+            response.collection.items
+                .randomOrNull()
                 ?.links
                 ?.firstOrNull()
                 ?.href
-
-            Log.d("NASA_IMAGE_API", "Hero Image URL: $imageUrl")
-            imageUrl
         } catch (e: Exception) {
             Log.e("NASA_IMAGE_API", "Failed to fetch hero image", e)
             null
         }
     }
+
 
     // 🖼️ SPACE GALLERY (multiple images)
     suspend fun fetchGalleryImages(query: String = "space"): List<String> {

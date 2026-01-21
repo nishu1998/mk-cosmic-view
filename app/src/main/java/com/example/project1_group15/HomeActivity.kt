@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
 
                 R.id.nav_home -> {
-                    // Already on Home
+                    refreshHome()
                 }
 
                 R.id.nav_apod -> {
@@ -59,7 +59,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_gallery -> {
-                    Toast.makeText(this, "Space Gallery coming soon 🖼️", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, SpaceGalleryActivity::class.java))
                 }
 
                 R.id.nav_news -> {
@@ -128,6 +128,9 @@ class HomeActivity : AppCompatActivity() {
 
             }
         }
+    }
+    private fun refreshHome() {
+        loadNasaHeroImage()
     }
 
 

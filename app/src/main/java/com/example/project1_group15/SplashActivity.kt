@@ -3,6 +3,7 @@ package com.example.project1_group15
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project1_group15.databinding.ActivitySplashBinding
 
@@ -10,13 +11,25 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
 
+    // ✅ Preload Home API silently
+    private val homeViewModel: NasaImageViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 🔹 Start preloading Home data
+        preloadHomeData()
+
+        // 🔹 Play branding animation
         playSplashVideo()
+    }
+
+    private fun preloadHomeData() {
+        // This warms up the API & cache before Home opens
+        homeViewModel.loadHeroImage()
     }
 
     private fun playSplashVideo() {
@@ -26,25 +39,7 @@ class SplashActivity : AppCompatActivity() {
 
         binding.videoView.setVideoURI(videoUri)
 
-        // ✅ STEP 3: Scale video properly (no stretch)
-        binding.videoView.setOnPreparedListener { mediaPlayer ->
-            mediaPlayer.isLooping = false
-
-            val videoRatio =
-                mediaPlayer.videoWidth.toFloat() / mediaPlayer.videoHeight.toFloat()
-            val viewRatio =
-                binding.videoView.width.toFloat() / binding.videoView.height.toFloat()
-
-            val scale = videoRatio / viewRatio
-
-            if (scale >= 1f) {
-                binding.videoView.scaleX = scale
-            } else {
-                binding.videoView.scaleY = 1f / scale
-            }
-
-            binding.videoView.start()
-        }
+        binding.videoView.start()
 
         // 🎬 When animation finishes → Home
         binding.videoView.setOnCompletionListener {
@@ -60,13 +55,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun navigateToHome() {
         startActivity(Intent(this, HomeActivity::class.java))
-
-        // ✅ STEP 4: Smooth fade transition
-        overridePendingTransition(
-            android.R.anim.fade_in,
-            android.R.anim.fade_out
-        )
-
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }
 }

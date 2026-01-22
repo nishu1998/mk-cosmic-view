@@ -28,9 +28,7 @@ class NasaImageRepository {
             val queries = listOf(
                 "nebula",
                 "galaxy",
-                "deep space",
                 "star cluster",
-                "cosmic dust"
             )
 
             val randomQuery = queries.random()

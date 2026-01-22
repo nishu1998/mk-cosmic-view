@@ -87,28 +87,27 @@ class HomeActivity : AppCompatActivity() {
     // 🧱 Home card clicks
     private fun setupCardClicks() {
 
-        // 🖼️ Space Gallery (future feature)
+        // 🖼️ Space Gallery
         binding.cardGallery.setOnClickListener {
             startActivity(Intent(this, SpaceGalleryActivity::class.java))
         }
 
-
-        // 📅 Upcoming Events
+        // 📅 Upcoming Astronomical Events
         binding.cardEvents.setOnClickListener {
             startActivity(Intent(this, UpcomingEventsActivity::class.java))
         }
 
-        binding.cardEvents.setOnClickListener {
+        // ☄️ Near-Earth Objects (NeoWs)
+        binding.cardNeoWs.setOnClickListener {
             startActivity(Intent(this, NeoWsActivity::class.java))
         }
 
-        // 🚀 Latest Space News (future feature)
+        // 🚀 Space News (future)
         binding.cardNews.setOnClickListener {
             Toast.makeText(this, "Space News coming soon 📰", Toast.LENGTH_SHORT).show()
         }
-
-
     }
+
 
 
     private fun loadNasaHeroImage() {

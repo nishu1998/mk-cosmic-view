@@ -6,5 +6,7 @@
     <color name="card_background">#162794</color>
     <color name="card_text_primary">#FFFFFF</color>
     <color name="card_text_secondary">#D1D3FF</color>
+    <color name="ripple_color">#33FFFFFF</color>
+
 
 </resources>

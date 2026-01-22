@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/ic_placeholder_space">
 
-        <!-- 📜 SCROLLABLE CONTENT -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +34,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:contentDescription="Space Image"
                         android:src="@drawable/ic_placeholder_space"/>
 
                     <View
@@ -43,7 +41,6 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/gradient_overlay"/>
 
-                    <!-- 🔥 HERO OVERLAY CONTENT -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -51,58 +48,21 @@
                         android:padding="24dp"
                         android:gravity="center_vertical">
 
-                        <!-- Headline -->
                         <TextView
-                            android:id="@+id/tvHeroTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Explore Things\nBeyond Earth"
                             android:textColor="@android:color/white"
                             android:textSize="34sp"
-                            android:textStyle="bold"
-                            android:lineSpacingExtra="6dp"/>
+                            android:textStyle="bold"/>
+
                         <TextView
-                            android:id="@+id/tvHeroSubtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Astronomical Picture of the Day"
                             android:textColor="@color/card_text_secondary"
                             android:textSize="14sp"
                             android:layout_marginTop="8dp"/>
-
-
-                        <!-- CTA Row -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginTop="24dp">
-
-                            <!-- Circle Button -->
-                            <ImageButton
-                                android:id="@+id/btnHeroAction"
-                                android:layout_width="56dp"
-                                android:layout_height="56dp"
-                                android:background="@drawable/bg_circle_outline"
-                                android:src="@drawable/ic_arrow_right"
-                                android:contentDescription="Let's Go"
-                                app:tint="@android:color/white"
-                                android:clickable="false"
-                                android:focusable="false"
-                                android:importantForAccessibility="no"/>
-
-                            <!-- Button Text -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="LET’S GO!"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:layout_marginStart="12dp"/>
-                        </LinearLayout>
-
                     </LinearLayout>
                 </FrameLayout>
 
@@ -119,6 +79,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="6dp"
                         app:cardUseCompatPadding="true">
@@ -126,18 +88,30 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
                             android:background="@color/card_background"
-                            android:padding="25dp">
+                            android:foreground="@drawable/bg_card_ripple">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="🖼️ Space Gallery"
-                                android:textColor="@color/card_text_primary"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:textColor="@color/card_text_primary"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Browse stunning NASA images"
+                                android:textSize="13sp"
+                                android:textColor="@color/card_text_secondary"
+                                android:layout_marginTop="4dp"/>
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
 
                     <!-- 📅 UPCOMING EVENTS -->
                     <androidx.cardview.widget.CardView
@@ -145,32 +119,49 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="6dp"
                         app:cardUseCompatPadding="true">
 
+                        <!-- Content + Ripple -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
                             android:background="@color/card_background"
-                            android:padding="25dp">
+                            android:foreground="@drawable/bg_card_ripple">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📅 Upcoming Astronomical Events"
-                                android:textColor="@color/card_text_primary"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:textColor="@color/card_text_primary"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Meteor showers / celestial events"
+                                android:textSize="13sp"
+                                android:textColor="@color/card_text_secondary"
+                                android:layout_marginTop="4dp"/>
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- ☄️ Near Earth Objects -->
+
+                    <!-- ☄️ NEAR EARTH OBJECTS -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardNeoWs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="6dp"
                         app:cardUseCompatPadding="true">
@@ -178,22 +169,30 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/card_background"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="20dp"
-                            android:gravity="center_vertical">
+                            android:background="@color/card_background"
+                            android:foreground="@drawable/bg_card_ripple">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="☄️ Near-Earth Objects"
-                                android:textColor="@color/card_text_primary"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:textColor="@color/card_text_primary"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Track potentially hazardous asteroids"
+                                android:textSize="13sp"
+                                android:textColor="@color/card_text_secondary"
+                                android:layout_marginTop="4dp"/>
 
                         </LinearLayout>
-
                     </androidx.cardview.widget.CardView>
+
 
 
                     <!-- 🚀 SPACE NEWS -->
@@ -201,6 +200,9 @@
                         android:id="@+id/cardNews"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="6dp"
                         app:cardUseCompatPadding="true">
@@ -208,18 +210,30 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp"
                             android:background="@color/card_background"
-                            android:padding="25dp">
+                            android:foreground="@drawable/bg_card_ripple">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="🚀 Space News (Coming Soon)"
-                                android:textColor="@color/card_text_primary"
+                                android:text="🚀 Space News"
                                 android:textSize="18sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:textColor="@color/card_text_primary"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Latest discoveries / missions"
+                                android:textSize="13sp"
+                                android:textColor="@color/card_text_secondary"
+                                android:layout_marginTop="4dp"/>
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
 
                 </LinearLayout>
             </LinearLayout>
@@ -233,9 +247,8 @@
             android:layout_margin="16dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_menu"
-            android:contentDescription="Menu"
-            android:layout_gravity="top|start"
-            app:tint="@android:color/white"/>
+            app:tint="@android:color/white"
+            android:layout_gravity="top|start"/>
     </FrameLayout>
 
     <!-- ================= DRAWER ================= -->
@@ -244,10 +257,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/card_text_secondary"
-        android:textStyle="bold"
-        app:menu="@menu/drawer_menu"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/black"/>
+        app:menu="@menu/drawer_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:contentDescription="Astronomy Picture of the Day"
-                android:src="@drawable/ic_placeholder_space"/>
+                android:src="@drawable/image"/>
 
             <!-- Gradient overlay -->
             <View

@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.project1_group15"
+    namespace = "com.mkstudio.cosmicview"
     compileSdk = 34
     buildFeatures {
         buildConfig = true
     }
     defaultConfig {
-        applicationId = "com.example.project1_group15"
+        applicationId = "com.mkstudio.cosmicview"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

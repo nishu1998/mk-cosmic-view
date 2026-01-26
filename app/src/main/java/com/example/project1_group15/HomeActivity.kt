@@ -29,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
         setupDrawerNavigation()
         setupApodClick()
         setupCardClicks()
+        setupLetsGoCta()
         loadNasaHeroImage()
 
     }
@@ -81,6 +82,12 @@ class HomeActivity : AppCompatActivity() {
         binding.imgApod.setOnClickListener {
             val intent = Intent(this, APODActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setupLetsGoCta() {
+        binding.ctaLetsGo.setOnClickListener {
+            startActivity(Intent(this, APODActivity::class.java))
         }
     }
 

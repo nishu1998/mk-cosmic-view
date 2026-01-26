@@ -11,8 +11,9 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
 
-    // ✅ Preload Home API silently
+    //  Preload Home API silently
     private val homeViewModel: NasaImageViewModel by viewModels()
+    private var hasNavigated = false // 🛡️ prevent multiple calls
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +21,17 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 🔹 Start preloading Home data
+        //  Start preloading Home data
         preloadHomeData()
 
-        // 🔹 Play branding animation
+        //  Play branding animation
         playSplashVideo()
+
+        //  Tap anywhere to skip
+        setupSkipOnTap()
+
+        // Skip Hint
+        showTapToSkipHint()
     }
 
     private fun preloadHomeData() {
@@ -51,6 +58,31 @@ class SplashActivity : AppCompatActivity() {
             navigateToHome()
             true
         }
+    }
+
+    private fun setupSkipOnTap() {
+        binding.root.setOnClickListener {
+            if (!hasNavigated) {
+                binding.videoView.stopPlayback()
+                navigateToHome()
+            }
+        }
+    }
+
+    private fun showTapToSkipHint() {
+        binding.tvTapToSkip.animate()
+            .alpha(1f)
+            .setDuration(500)
+            .withEndAction {
+                // Auto-hide after 2 seconds
+                binding.tvTapToSkip.postDelayed({
+                    binding.tvTapToSkip.animate()
+                        .alpha(0f)
+                        .setDuration(500)
+                        .start()
+                }, 2000)
+            }
+            .start()
     }
 
     private fun navigateToHome() {
